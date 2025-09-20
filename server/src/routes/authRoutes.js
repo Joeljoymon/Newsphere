@@ -11,8 +11,8 @@ const createTokenAndSetCookie = (res, user) => {
   // set cookie (httpOnly). In production set secure: true
   res.cookie("token", token, {
     httpOnly: true,
-    secure: false, // set true if https
-    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production", // set true if https
+    sameSite:  process.env.NODE_ENV === "production" ? "none" : "lax",
     maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
   });
 };

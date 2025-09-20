@@ -1,5 +1,7 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL =
+ import.meta.env.VITE_API_URL;
 
+// generic request helper
 async function request(path, options = {}) {
   const res = await fetch(API_URL + path, {
     credentials: "include",
@@ -12,7 +14,9 @@ async function request(path, options = {}) {
 
   if (!res.ok) {
     let err = {};
-    try { err = await res.json(); } catch {}
+    try {
+      err = await res.json();
+    } catch {}
     throw new Error(err.message || "API Error");
   }
 
